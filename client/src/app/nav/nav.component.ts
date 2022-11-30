@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 
@@ -16,7 +18,8 @@ export class NavComponent implements OnInit {
   // loggedIn = false;
   // currentUser$ : Observable<User | null> =of(null) //assigning a observable of null
 
-  constructor(public accountService : AccountService) { 
+  constructor(public accountService : AccountService,private router:Router,
+    private toastr:ToastrService) { 
     console.log("inside nav.component constructor()")
   }
 
@@ -42,15 +45,20 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: response =>{
         console.log(response);
+        this.router.navigateByUrl('/members')
         // this.loggedIn = true;
       },
-      error: error => console.log(error)
+      error: error =>{
+        this.toastr.error(error.error)
+        console.log(error.error)
+      } 
     })
   }
   logout(){
     console.log("logout() from nav.component")
     this.accountService.logout(); //removes the item from local storage
     // this.loggedIn=false;
+    this.router.navigateByUrl("/");
   }
 
 }
