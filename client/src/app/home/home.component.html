@@ -1,0 +1,22 @@
+<div class="container">
+    <div *ngIf="!registerMode" style="text-align:centre ;">
+          <h1>Find your match!</h1>
+          <p>Come on in to view your matches..all you need is to sign in</p>
+   
+    <div class="text-centre">
+        <button class="btn btn-primary  me-2" (click)="registerToggle()">Register</button> 
+        <button class="btn btn-primary btn-info ">Learn more</button> 
+    </div>
+</div>
+</div>
+
+<div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <!-- <app-register [usersFromHomeComponent]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register> -->
+            <app-register [usersFromHomeComponent]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        </div>
+        
+    </div>
+
+</div>
